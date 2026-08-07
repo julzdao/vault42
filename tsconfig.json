@@ -3,6 +3,11 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "core": ["./dist/core"],
+      "theme": ["./dist/theme"],
+      "ui": ["./dist/ui"]
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -28,6 +33,24 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/core/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/core/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ui/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ui/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/theme/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/theme/tsconfig.spec.json"
     }
   ]
 }
