@@ -5,3 +5,4 @@
 export * from './lib/core';
 export * from './lib/garden.types';
 export * from './lib/garden-utils';
+export * from './lib/testing-mocks';
