@@ -13,14 +13,14 @@ import {
   toSearchCandidates,
 } from '@vault42/core';
 import { GardenIndex, NoteRecord, SearchCandidate } from '@vault42/core';
-import { V42BacklinksPanelComponent } from '../backlinks-panel/backlinks-panel.component';
-import { V42FooterNotesNavComponent } from '../footer-notes/footer-notes-nav.component';
-import { V42NoteCard } from '../note-card/note-card.component';
-import { V42NoteContentComponent } from '../note-content/note-content.component';
-import { V42NoteRowItem } from '../note-row-item/note-row-item.component';
-import { V42SearchBarComponent } from '../search-bar/search-bar.component';
-import { V42SubfolderNavComponent } from '../subfolder-nav/subfolder-nav.component';
-import { V42TopNavComponent } from '../top-nav/top-nav.component';
+import { V42BacklinksPanelComponent } from '../../components/backlinks-panel/backlinks-panel.component';
+import { V42FooterNotesNavComponent } from '../../components/footer-notes/footer-notes-nav.component';
+import { V42NoteCard } from '../../components/note-card/note-card.component';
+import { V42NoteContentComponent } from '../../components/note-content/note-content.component';
+import { V42NoteRowItem } from '../../components/note-row-item/note-row-item.component';
+import { V42SearchBarComponent } from '../../components/search-bar/search-bar.component';
+import { V42SubfolderNavComponent } from '../../components/subfolder-nav/subfolder-nav.component';
+import { V42TopNavComponent } from '../../components/top-nav/top-nav.component';
 
 @Component({
   selector: 'app-home-page',
