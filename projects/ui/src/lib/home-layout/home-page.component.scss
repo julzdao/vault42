@@ -1,0 +1,135 @@
+
+$NOTE_COVER_HEIGHT: 25em;
+
+.screen {
+  min-height: 100vh;
+}
+
+.status {
+  padding: 3rem;
+  text-align: center;
+
+  &.error {
+    color: #ff8b8b;
+  }
+}
+
+.content {
+  padding: 1.1rem;
+
+  @media (min-width: 960px) {
+    padding: 1.8rem 2.2rem;
+  }
+}
+
+.listing-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.listing-head {
+  margin-bottom: 1rem;
+
+  h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-family: var(--font-lato);
+    font-weight: 300;
+    letter-spacing: 0.8em;
+  }
+
+  p {
+    margin: 0.35rem 0 0;
+    color: var(--vault42-muted-foreground);
+    font-size: 0.88rem;
+  }
+}
+
+.notes-row-title {
+  margin-top: 2em;
+  font-size: 1.6rem;
+  font-family: var(--font-lato);
+  font-weight: 300;
+}
+
+.note-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 90%;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+
+  @media (min-width: 860px) {
+    width: 100%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 100%;
+  }
+}
+
+.note-row-item {
+  justify-self:stretch;
+  width: 100%;
+}
+
+.empty-box {
+  border: 1px solid var(--vault42-border);
+  background: var(--vault42-card);
+  color: var(--vault42-muted-foreground);
+  padding: 0.9rem;
+}
+
+.note-shell {
+  max-width: var(--text-column-max-width, 640px);
+  margin: 0 auto;
+  padding: 1rem 0.6rem 2.2rem;
+
+  @media (min-width: 900px) {
+    padding: 1.6rem 3.2rem 3rem;
+  }
+
+  @media (min-width: 1200px) {
+    padding: 2rem 4.2rem 3.4rem;
+  }
+}
+
+.note-header {
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.note-title {
+  margin: 0;
+}
+
+.note-cover {
+  width: 100%; 
+  height: $NOTE_COVER_HEIGHT;
+  object-fit:cover;
+  object-position: top;
+}
+
+.note-description {
+  margin: 0.7rem auto 0;
+  max-width: 56ch;
+  color: var(--vault42-muted-foreground);
+}
+
+.note-date {
+  margin: 0.55rem 0 0;
+  font-size: 0.84rem;
+  color: var(--vault42-muted-foreground);
+}
+
+.muted {
+  color: var(--vault42-muted-foreground);
+}
+
+.note-attachment {
+  width: 100%;
+  height: 100%;
+  
+}

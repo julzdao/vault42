@@ -1,0 +1,26 @@
+<section class="tag-page">
+      <header>
+        <div>
+          <p>Tag Wiki</p>
+          <h1>#{{ resolvedTag }}</h1>
+          <small>{{ matches.length }} {{ matches.length === 1 ? 'note' : 'notes' }} connected to this tag.</small>
+        </div>
+        <button type="button" (click)="backToGarden()">Back to Garden</button>
+      </header>
+
+      @if (matches.length === 0) {
+        <div class="empty">No notes found for this tag yet.</div>
+      }
+
+      <ul>
+        @for (note of matches; track note.slug) {
+          <li>
+            <button type="button" (click)="openNote(note.slug)">
+              <h2>{{ note.title }}</h2>
+              <p>{{ note.notebook }} / {{ note.relativePath }}</p>
+              <small>{{ context(note) }}</small>
+            </button>
+          </li>
+        }
+      </ul>
+    </section>

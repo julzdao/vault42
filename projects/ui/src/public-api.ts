@@ -11,3 +11,9 @@ export * from './lib/note-row-item';
 export * from './lib/search-bar';
 export * from './lib/subfolder-nav';
 export * from './lib/top-nav';
+
+/*
+ * Public API Layout Components
+ */
+export * from './lib/home-layout';
+export * from './lib/tag-layout';

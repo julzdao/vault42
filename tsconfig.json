@@ -4,9 +4,9 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "core": ["./dist/core"],
-      "theme": ["./dist/theme"],
-      "ui": ["./dist/ui"]
+      "@vault42/core": ["./dist/core"],
+      "@vault42/theme": ["./dist/theme"],
+      "@vault42/ui": ["./dist/ui"]
     },
     "strict": true,
     "noImplicitOverride": true,
