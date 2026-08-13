@@ -1,0 +1,13 @@
+<div
+      class="note-content"
+      (click)="onClick($event)"
+      (mouseover)="onHover($event)"
+      (mouseout)="hidePreview()"
+      [innerHTML]="html"
+    ></div>
+
+    <div #preview class="preview" [style.opacity]="previewState.visible ? 1 : 0" [style.left.px]="previewState.x" [style.top.px]="previewState.y">
+      @if (previewState.src) {
+        <img [src]="previewState.src" alt="" aria-hidden="true" loading="lazy" />
+      }
+</div>

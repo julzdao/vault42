@@ -1,20 +1,23 @@
-$color-background: #E2E6E7;
-$color-dark-background: #0d0d0f;
-$color-background-gradient: #1d172a;
-$color-background-dot: #989ea0;
-$color-foreground: #2f3335;
-$color-muted: #dcdfe0; // this one is used on index.json or ingest. Keep on root as well.
-$color-muted-foreground: #6e7476;
-$color-card: #d3d6d6;
-$color-quote: #4d4d4d;
-$color-quote-background: #dcdddd;
-$color-callout: #585f62;
-$color-callout-background: #d9dedf;
-$color-tag-background: #ccd1d2;
-$color-obsidian-link: #b462ff;
-$color-top-link: #989ea0;
-$color-top-link-active: #16131b;
-$color-link: #3199f3;
-$color-border: #CDD5D6;
-$color-divider: #eceeee;
-$color-accent: #31F382;
+
+:root {
+    --vault42-background: #E2E6E7;
+    --vault42-dark-background: #0d0d0f;
+    --vault42-background-gradient: #1d172a;
+    --vault42-background-dot: #989ea0;
+    --vault42-foreground: #2f3335;
+    --vault42-muted: #dcdfe0; // this one is used on index.json or ingest. Keep on root as well.
+    --vault42-muted-foreground: #6e7476;
+    --vault42-card: #d3d6d6;
+    --vault42-quote: #4d4d4d;
+    --vault42-quote-background: #dcdddd;
+    --vault42-callout: #585f62;
+    --vault42-callout-background: #d9dedf;
+    --vault42-tag-background: #ccd1d2;
+    --vault42-obsidian-link: #b462ff;
+    --vault42-top-link: #989ea0;
+    --vault42-top-link-active: #16131b;
+    --vault42-link: #3199f3;
+    --vault42-border: #CDD5D6;
+    --vault42-divider: #eceeee;
+    --vault42-accent: #31F382;
+}

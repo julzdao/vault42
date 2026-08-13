@@ -1,0 +1,36 @@
+<button class="search-trigger" type="button" (click)="open = true">
+      <span>{{ defaultQuery.trim() ? 'Search: ' + defaultQuery : 'Search notes...' }}</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+
+    @if (open) {
+      <div class="overlay" (mousedown)="closeByBackdrop($event)">
+        <section class="panel" role="dialog" aria-modal="true">
+          <input
+            [(ngModel)]="query"
+            placeholder="Search by title, tag, notebook, or path..."
+            (keydown)="onInputKeydown($event)"
+          />
+
+          <ul>
+            @if (suggestions.length === 0) {
+              <li class="empty">No matching notes</li>
+            }
+            @for (item of suggestions; track item.slug; let idx = $index) {
+              <li>
+                <button
+                  type="button"
+                  [class.active]="idx === activeIndex"
+                  (mouseenter)="activeIndex = idx"
+                  (click)="choose(item)"
+                >
+                  <strong>{{ item.title }}</strong>
+                  <small>{{ item.notebook }}</small>
+                  <small>{{ item.relativePath }}</small>
+                </button>
+              </li>
+            }
+          </ul>
+        </section>
+      </div>
+    }

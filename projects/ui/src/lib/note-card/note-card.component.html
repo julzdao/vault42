@@ -1,0 +1,15 @@
+<button type="button" class="note-card" (click)="open.emit()">
+    @if (note.coverImage) {
+        <img [src]="note.coverImage">
+    }
+    <h2>{{ note.title }}</h2>
+    <!-- <p class="card-summary">{{ summary(note) }}</p> -->
+    @if ((note.tags?.length ?? 0) > 0) {
+        <div class="card-tags">
+        @for (tag of note.tags ?? []; track tag) {
+            <span>#{{ tag }}</span>
+        }
+        </div>
+    }
+    
+</button>

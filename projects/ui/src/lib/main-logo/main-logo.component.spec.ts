@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Ui } from './ui';
+import { V42Logo } from './main-logo.component';
 
-describe('Ui', () => {
-  let component: Ui;
-  let fixture: ComponentFixture<Ui>;
+describe('MainLogo', () => {
+  let component: V42Logo;
+  let fixture: ComponentFixture<V42Logo>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Ui],
-    }).compileComponents();
+      imports: [V42Logo]
+    })
+    .compileComponents();
 
-    fixture = TestBed.createComponent(Ui);
+    fixture = TestBed.createComponent(V42Logo);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

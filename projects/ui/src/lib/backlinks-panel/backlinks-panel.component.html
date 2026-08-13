@@ -1,0 +1,14 @@
+ <section class="panel">
+      <h2>Backlinks ({{ backlinks.length }})</h2>
+      @if (backlinks.length === 0) {
+        <p class="muted">No backlinks found for this note.</p>
+      }
+      <ul>
+        @for (item of backlinks; track item.fromSlug + '-' + $index) {
+          <li>
+            <button type="button" (click)="openNote.emit(item.fromSlug)">{{ item.fromTitle }}</button>
+            <p>{{ item.context }}</p>
+          </li>
+        }
+      </ul>
+</section>

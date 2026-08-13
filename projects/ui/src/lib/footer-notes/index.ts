@@ -1,0 +1,1 @@
+export * from './footer-notes-nav.component';
