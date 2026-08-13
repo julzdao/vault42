@@ -1,0 +1,24 @@
+ <nav class="topnav">
+      <v42-main-logo variant="default" [logoName]="brandName" [clickable]="true" (navigate)="navigate.emit({})"></v42-main-logo>  
+      <button
+        type="button"
+        class="nav-link"
+        [class.active]="!current"
+        (click)="navigate.emit({ notebook: undefined })"
+      >
+        ALL
+      </button>
+      @for (notebook of notebooks; track notebook) {
+        <button
+          type="button"
+          class="nav-link"
+          [class.active]="current === notebook"
+          (click)="navigate.emit({ notebook })"
+        >
+          {{ notebook.toUpperCase() }}
+        </button>
+      }
+      <div class="right-slot">
+        <ng-content></ng-content>
+      </div>
+    </nav>

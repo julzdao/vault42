@@ -1,0 +1,12 @@
+<nav class="subfolder-nav">
+      <button type="button" [class.active]="!currentSubfolder" (click)="select.emit(undefined)">All</button>
+      @for (item of items; track item.name) {
+        <button
+          type="button"
+          [class.active]="currentSubfolder?.toLowerCase() === item.name.toLowerCase()"
+          (click)="select.emit(item.name)"
+        >
+          {{ item.name }}
+        </button>
+      }
+    </nav>

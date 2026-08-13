@@ -1,0 +1,30 @@
+<footer class="site-footer">
+      <div class="footer-inner">
+       <v42-main-logo variant="footer" [logoName]="brandName" [clickable]="false" (navigate)="navigate.emit({})"></v42-main-logo> 
+
+        <div class="notes-grid">
+          @for (column of columns; track $index) {
+            <section class="notes-col">
+              @for (group of column; track group.key) {
+                <div class="group">
+                  <h4 class="group-title">
+                    {{ group.notebook.toUpperCase() }}
+                    @if (group.subfolder) {
+                      <span>/ {{ group.subfolder.toUpperCase() }}</span>
+                    }
+                  </h4>
+
+                  <ul>
+                    @for (note of group.notes; track note.slug) {
+                      <li>
+                        <button type="button" (click)="openNote.emit(note.slug)">{{ note.title }}</button>
+                      </li>
+                    }
+                  </ul>
+                </div>
+              }
+            </section>
+          }
+        </div>
+      </div>
+    </footer>

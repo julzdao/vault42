@@ -1,0 +1,36 @@
+
+.topnav {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--vault42-border);
+  padding: 1rem 1.5rem;
+}
+
+button {
+  border: 0;
+  background: transparent;
+  color: var(--vault42-foreground);
+  cursor: pointer;
+}
+
+.nav-link {
+  border-radius: 0.45rem;
+  padding: 0.35rem 0.55rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  color: var(--vault42-top-link);
+
+  &:hover,
+  &.active {
+    color: var(--vault42-top-link-active);
+  }
+}
+
+.right-slot {
+  margin-left: auto;
+  width: min(360px, 44vw);
+  min-width: 190px;
+}

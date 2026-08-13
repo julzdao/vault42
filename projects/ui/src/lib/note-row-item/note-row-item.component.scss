@@ -1,0 +1,72 @@
+
+@mixin rowTextFont {
+    font-family: var(--font-lato);
+    font-weight: 300;
+    font-size: 1.1rem;
+}
+
+@mixin hideExtraItems {
+    display:none;
+
+    @media (min-width: 860px) {
+        width: 100%;
+        display:none;
+    }
+
+    @media (min-width: 1200px) {
+        width: 100%;
+        display:block;
+    }
+}
+
+@mixin resetMargin {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.note-row {
+    display:flex;
+    align-items: center;
+    justify-content:flex-start;
+    gap: 2em;
+    opacity: 70%;
+    background: transparent;
+    padding: 0.8em 0 0.8em 0.2em;
+    border-bottom: 2px solid  var(--vault42-border);
+
+    &:hover {
+        cursor: pointer;
+        opacity: 100%;
+        background: var(--vault42-callout-background);
+        border-bottom: 2px solid var(--vault42-accent);
+    }
+
+    &__notebook {
+        @include rowTextFont;
+        @include hideExtraItems;
+        @include resetMargin;
+
+        text-transform:capitalize;
+        width: 10em;
+        text-align: left;
+    }
+
+    &__title {
+        @include resetMargin;
+
+        font-family: var(--font-mono);
+        font-weight: 300;
+        font-size: 1.1rem;
+        color: var(--vault42-foreground);
+        width: 42em;
+        text-align: left;
+    }
+
+    &__description {
+        @include rowTextFont;
+        @include hideExtraItems;
+        @include resetMargin;
+
+        text-align: left;
+    }
+}

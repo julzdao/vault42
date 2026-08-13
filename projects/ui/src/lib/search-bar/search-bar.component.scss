@@ -1,0 +1,91 @@
+
+.search-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--vault42-border);
+  background: var(--muted);
+  color: var(--vault42-muted-foreground);
+  padding: 0.38rem 0.55rem;
+  font-size: 0.74rem;
+  line-height: 1.1;
+  cursor: pointer;
+
+  kbd {
+    border: 1px solid var(--vault42-border);
+    padding: 0.12rem 0.32rem;
+    font-size: 0.56rem;
+    border-radius: 0.25rem;
+    color: var(--vault42-foreground);
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(3px);
+  padding: 8vh 1rem 1rem;
+}
+
+.panel {
+  margin: 0 auto;
+  width: min(760px, 96vw);
+  border: 1px solid var(--vault42-border);
+  background: var(--vault42-card);
+
+  input {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--vault42-border);
+    background: transparent;
+    color: var(--vault42-foreground);
+    padding: 0.9rem;
+    font-size: 1rem;
+    outline: 0;
+  }
+
+  ul {
+    max-height: 60vh;
+    overflow: auto;
+    list-style: none;
+    margin: 0;
+    padding: 0.4rem;
+  }
+
+  .empty {
+    text-align: center;
+    color: var(--vault42-muted-foreground);
+    padding: 1.2rem;
+  }
+
+  li button {
+    width: 100%;
+    text-align: left;
+    border: 0;
+    background: transparent;
+    color: var(--vault42-muted-foreground);
+    padding: 0.55rem;
+    cursor: pointer;
+    display: grid;
+    gap: 0.2rem;
+
+    &.active,
+    &:hover {
+      background: var(--muted);
+      color: var(--vault42-foreground);
+    }
+
+    strong {
+      font-size: 0.9rem;
+      color: var(--vault42-foreground);
+    }
+
+    small {
+      font-size: 0.7rem;
+      color: var(--vault42-muted-foreground);
+    }
+  }
+}
