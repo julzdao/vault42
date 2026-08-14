@@ -1,1 +1,44 @@
 @use './colors';
+@use './fonts';
+@use './reset';
+@use './text';
+@use './meta';
+
+:root {
+    --text-column-max-width: 800px;
+    --body-2: 17px;
+    --leading-155: 1.55;
+    --prose-line-height: 1.42;
+    --weight-text-regular: 400;
+    --background-dot-spacing: 133px;
+    --background-dot-size: 1px;
+}
+
+body {
+  background: radial-gradient(var(--vault42-background-gradient), var(--vault42-background));
+  color: var(--vault42-foreground);
+  box-sizing: border-box;
+  font-family: var(--font-lato);
+  font-weight: 300;
+  margin: 0;
+  line-height: 1.55;
+  padding: 0;
+  overflow-x: hidden;
+  font-size: 1rem;
+
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background-image: radial-gradient(var(--vault42-background-dot) var(--background-dot-size), var(--vault42-background) var(--background-dot-size));
+  background-size: var(--background-dot-spacing) var(--background-dot-spacing);
+  background-attachment: fixed;
+
+    @media (min-width: 820px) {
+      font-size: 1.1rem;
+    }
+}
+
+button,
+input {
+  font: inherit;
+}

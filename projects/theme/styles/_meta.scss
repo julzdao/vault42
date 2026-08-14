@@ -1,0 +1,48 @@
+@use './reset';
+
+/* Styles applied to the div component responsible for displaying each note tag, properties, etc... from Obsidian YAML */
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  .chips {
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    border: 1px solid var(--vault42-border);
+    background: var(--muted);
+    color: var(--vault42-muted-foreground);
+    padding: 0.3rem 0.45rem;
+    font-size: 0.67rem;
+  }
+
+  .stage {
+    background: color-mix(in srgb, #ffe97b 20%, transparent);
+    color: #ffe97b;
+  }
+
+  .tag {
+    @include reset.reset-button-mixin;
+    cursor: pointer;
+    border: 0px solid var(--vault42-border);
+    
+    font-family: var(--font-mono);
+    color: var(--vault42-muted-foreground);
+    font-size: 0.8rem;
+    background-color: var(--vault42-tag-background);
+    padding: 0.3em 0.7em;
+    margin-right: 0.4em;
+
+    &:hover {
+        color: var(--vault42-muted-foreground);
+        background-color: var(--vault42-accent);
+    }
+  }
+
+}
