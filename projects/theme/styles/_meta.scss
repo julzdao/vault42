@@ -1,4 +1,4 @@
-@import './reset';
+@use './reset';
 
 /* Styles applied to the div component responsible for displaying each note tag, properties, etc... from Obsidian YAML */
 .meta-row {
@@ -28,7 +28,7 @@
   }
 
   .tag {
-    @extend .reset-button;
+    @include reset.reset-button-mixin;
     cursor: pointer;
     border: 0px solid var(--vault42-border);
     

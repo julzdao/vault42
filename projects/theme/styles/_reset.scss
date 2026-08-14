@@ -1,4 +1,5 @@
-.reset-button {
+
+@mixin reset-button-mixin {
     border: none;
     margin: 0;
     padding: 0;
@@ -18,4 +19,8 @@
 
     /* Corrects inability to style clickable `input` types in iOS */
     -webkit-appearance: none;
+}
+
+.reset-button {
+    @include reset-button-mixin;
 }
