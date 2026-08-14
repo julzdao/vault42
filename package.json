@@ -1,6 +1,11 @@
 {
   "name": "vault42",
   "version": "0.0.0",
+  "workspaces": [
+    "projects/core",
+    "projects/theme",
+    "projects/ui"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
