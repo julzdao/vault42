@@ -1,0 +1,15 @@
+{
+  "name": "@vault42/ingest",
+  "version": "1.0.0",
+  "description": "Script for ingesting Obsidian Vault",
+  "license": "ISC",
+  "author": "@julzdao",
+  "type": "commonjs",
+  "main": "./src/ingest-vault.mjs",
+  "scripts": {
+    "ingest:vault": "node ./src/ingest-vault.mjs"
+  },
+  "bin": {
+    "vault42-ingest": "./src/ingest-vault.mjs"
+  }
+}
