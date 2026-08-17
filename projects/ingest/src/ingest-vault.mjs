@@ -10,22 +10,30 @@ import { slugify, makeNoteHref, isExternalHref, normalizeLinkValue, resolveNoteS
 import { sanitizeSegment, markdownToHtml } from "./ingest/markdown.mjs";
 import { contextSnippet, expandedContext } from "./ingest/context-snippet.mjs";
 
+const CONFIG_FLAG = "--config";
 
-var ingestLocalJsonConfig = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
-console.log("config json file content is: " + ingestLocalJsonConfig.vaultPath);
+// Step 0 : Config Vault Path
+const args = process.argv.slice(2);
+const hasConfigFlag = args.includes(CONFIG_FLAG);
 
+if(!hasConfigFlag) {
+  console.error("[ERROR] --config flag is not set. Please consider adding it to your command line arguments before adding path to vault42.ingest.config.local json.");
+  process.exit(1);
+}
 
+const configFlagIndex = args.indexOf(CONFIG_FLAG);
+
+var ingestLocalJsonConfig = JSON.parse(fs.readFileSync(args[configFlagIndex + 1], 'utf8'));
 const vaultPath = ingestLocalJsonConfig.vaultPath;
-// const vaultPath = process.argv[2];
 
 if (!vaultPath) {
-  console.error("Usage: 1. Create a 'vault42.ingest.local.json' file and add 'vaultPath' property with the value for your obsidian vault path. 2. npm run ingest:vault");
+  console.error("[ERROR] Vault path config missing. Usage: 1. Create a 'vault42.ingest.local.json' file and add 'vaultPath' property with the value for your obsidian vault path. 2. npm run ingest:vault");
   process.exit(1);
 }
 
 const resolvedVault = path.resolve(vaultPath);
 if (!fs.existsSync(resolvedVault)) {
-  console.error(`Vault path not found: ${resolvedVault}`);
+  console.error(`[ERROR] Vault path not found: ${resolvedVault}`);
   process.exit(1);
 }
 
@@ -44,10 +52,10 @@ export const titleToSlug = new Map();
 /** @type {Map<string, string>} */
 export const pathToSlug = new Map();
 
-// Step 1
+// Step 1 - mirror assets
 mirrorVaultAssets(resolvedVault);
 
-// Step 2
+// Step 2 - find markdown files
 const markdownFiles = findMarkdownFiles(resolvedVault);
 
 for (const file of markdownFiles) {
@@ -124,6 +132,8 @@ for (const note of notes) {
     });
   }
 }
+
+// Step 3: parse markdown to html
 
 for (const note of notes) {
   note.htmlContent = markdownToHtml(note.rawContent, note.relativePath);
