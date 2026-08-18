@@ -4,7 +4,8 @@
   "workspaces": [
     "projects/core",
     "projects/theme",
-    "projects/ui"
+    "projects/ui",
+    "projects/ingest"
   ],
   "scripts": {
     "ng": "ng",
