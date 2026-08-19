@@ -154,30 +154,20 @@ export function markdownToHtml(markdown, fromRelativePath) {
       continue;
     }
 
-    if (trimmed.startsWith("### ")) {
+    /* Checks for any number of "#" followed by a space and puts them into two groups */
+    const HEADING_REGEX = /^(#{1,6})\s+(.*)$/; 
+        
+    const match = trimmed.match(HEADING_REGEX);
+    if(match) {
       if (inList) {
         html.push("</ul>");
         inList = false;
       }
-      html.push(`<h3>${inlineMarkdownToHtml(escapeHtml(trimmed.slice(4)), fromRelativePath)}</h3>`);
-      continue;
-    }
 
-    if (trimmed.startsWith("## ")) {
-      if (inList) {
-        html.push("</ul>");
-        inList = false;
-      }
-      html.push(`<h2>${inlineMarkdownToHtml(escapeHtml(trimmed.slice(3)), fromRelativePath)}</h2>`);
-      continue;
-    }
+      const headingLevel = match[1].length;
+      const headingText = match[2];
 
-    if (trimmed.startsWith("# ")) {
-      if (inList) {
-        html.push("</ul>");
-        inList = false;
-      }
-      html.push(`<h1>${inlineMarkdownToHtml(escapeHtml(trimmed.slice(2)), fromRelativePath)}</h1>`);
+      html.push(`<h${headingLevel}>${inlineMarkdownToHtml(escapeHtml(headingText), fromRelativePath)}</h${headingLevel}>`);
       continue;
     }
 
