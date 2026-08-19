@@ -4,6 +4,9 @@ import { ASSETS_FOLDER_NAME, PUBLIC_GENERATED_FOLDER } from "./constants.mjs";
 import { log } from "./logger.mjs";
 import { skipEntry } from "./file-system.mjs";
 
+const AUDIO_EXT = new Set(['.mp3', '.wav', '.ogg', '.m4a', '.flac', '.aac']);
+const IMAGE_EXT = new Set(['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp']);
+
 
 export function mirrorVaultAssets(dir, relBase = "") {
   log("STEP 1 :: mirrorVaultAssets - LOOKING FOR ASSETS");
@@ -44,4 +47,15 @@ function copyAssetsDirectory(absolutePath, relativePath) {
   fs.cpSync(absolutePath, destinationDir, {
       recursive: true
   });
+}
+
+/* 
+ * Gets the type of an asset file, based on the extension format.
+ * Currently only checking for AUDIO or IMAGE extensions.
+*/
+export function getAssetType(filePath) {
+  const ext = path.extname(filePath).toLowerCase();
+  if (AUDIO_EXT.has(ext)) return 'audio';
+  if (IMAGE_EXT.has(ext)) return 'image';
+  return 'unknown';
 }

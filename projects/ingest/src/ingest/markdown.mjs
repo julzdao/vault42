@@ -1,6 +1,7 @@
 
 import { removeSquareBrackets, parseCoverProperty } from "./parser.mjs";
 import { isExternalHref, resolveNoteSlug, makeNoteHref } from "./links.mjs";
+import { getAssetType } from "./assets.mjs";
 
 export function sanitizeSegment(input) {
   return input.replace(/[^a-zA-Z0-9 ._-]/g, "").trim();
@@ -194,10 +195,18 @@ export function markdownToHtml(markdown, fromRelativePath) {
         html.push("</ul>");
         inList = false;
       }
-      const imgLinkWithoutBrackets = removeSquareBrackets(trimmed.slice(1));
+      const linkWithoutBrackets = removeSquareBrackets(trimmed.slice(1));
       const segments = fromRelativePath.split("/").map(sanitizeSegment).filter(Boolean);
 
-      html.push(`<img class="note-attachment" src="${parseCoverProperty(imgLinkWithoutBrackets, segments)}">`);
+      const assetType = getAssetType(linkWithoutBrackets);
+      const resolvedSrc = parseCoverProperty(linkWithoutBrackets, segments);
+
+      if(assetType === "audio") {
+        html.push(`<audio class="v42-audio-player" controls src="${resolvedSrc}"></audio>`);
+      } else {
+        html.push(`<img class="note-attachment" src="${resolvedSrc}">`);
+      }
+
       continue;
     }
 
