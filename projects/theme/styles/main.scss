@@ -3,6 +3,7 @@
 @use './reset';
 @use './text';
 @use './meta';
+@use './media';
 
 :root {
     --text-column-max-width: 800px;
@@ -42,13 +43,3 @@ button,
 input {
   font: inherit;
 }
-
-audio {
-  margin: 0;
-  padding: 0;
-  border: 0px;
-  font-size: 100%;
-  font: inherit;
-  width: 100%;
-}
-
