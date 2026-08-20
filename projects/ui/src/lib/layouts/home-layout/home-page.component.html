@@ -55,6 +55,9 @@
               @if (selected.description) {
                 <p class="note-description">{{ selected.description }}</p>
               }
+              @if (selected.fundamental) {
+                <p class="note-fundamental">{{ selected.fundamental }}</p>
+              }
               @if (selected.createdAt) {
                 <p class="note-date">{{ formatDate(selected.createdAt) }}</p>
               }

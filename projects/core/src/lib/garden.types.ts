@@ -22,6 +22,8 @@ export type NoteRecord = {
   htmlContent: string;
   coverImage?: string;
   coverUpdatedAt?: string;
+  hasFundamental?: boolean;
+  fundamental?: string;
 };
 
 export type GardenIndex = {
