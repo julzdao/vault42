@@ -49,42 +49,47 @@
         </section>
       } @else {
         <article class="prose note-shell">
-          <header class="note-header">
-            <h1 class="note-title">{{ selected.title }}</h1>
-            @if (selected.description) {
-              <p class="note-description">{{ selected.description }}</p>
-            }
-            @if (selected.createdAt) {
-              <p class="note-date">{{ formatDate(selected.createdAt) }}</p>
-            }
-          </header>
+          <div class="note-sidebar">
+            <header class="note-header">
+              <h1 class="note-title">{{ selected.title }}</h1>
+              @if (selected.description) {
+                <p class="note-description">{{ selected.description }}</p>
+              }
+              @if (selected.createdAt) {
+                <p class="note-date">{{ formatDate(selected.createdAt) }}</p>
+              }
+            </header>
 
-          @if (selected.createdAt || (selected.tags?.length ?? 0) > 0 || (selected.stage?.length ?? 0) > 0) {
-            <div class="meta-row">
-              <div class="chips">
-                @if (selected.createdAt) {
-                  <span class="chip">Created {{ formatDate(selected.createdAt) }}</span>
-                }
-                @for (stage of selected.stage ?? []; track stage) {
-                  <span class="chip stage">Stage: {{ stage }}</span>
-                }
-                @for (tag of selected.tags ?? []; track trackByTag($index, tag)) {
-                  <button class="chip tag" type="button" (click)="goToTag(tag)">#{{ tag }}</button>
-                }
+            @if (selected.createdAt || (selected.tags?.length ?? 0) > 0 || (selected.stage?.length ?? 0) > 0) {
+              <div class="meta-row">
+                <div class="chips">
+                  @if (selected.createdAt) {
+                    <span class="chip">Created {{ formatDate(selected.createdAt) }}</span>
+                  }
+                  @for (stage of selected.stage ?? []; track stage) {
+                    <span class="chip stage">Stage: {{ stage }}</span>
+                  }
+                  @for (tag of selected.tags ?? []; track trackByTag($index, tag)) {
+                    <button class="chip tag" type="button" (click)="goToTag(tag)">#{{ tag }}</button>
+                  }
+                </div>
               </div>
-            </div>
-          }
+            }
+          </div>
+          
+          <div class="note-content-column prose">
+            @if (selected.coverImage) {
+              <img [src]="selected.coverImage" class="note-cover">
+            }
+            <v42-note-content [html]="selected.htmlContent" [previews]="notePreviews" (openNote)="openNote($event, 'content')"></v42-note-content>
+            <v42-backlinks-panel [backlinks]="selected.backlinks" (openNote)="openNote($event, 'backlink')"></v42-backlinks-panel>
+          </div>
+          
 
-          @if (selected.coverImage) {
-            <img [src]="selected.coverImage" class="note-cover">
-          }
-
-          <v42-note-content [html]="selected.htmlContent" [previews]="notePreviews" (openNote)="openNote($event, 'content')"></v42-note-content>
-          <v42-backlinks-panel [backlinks]="selected.backlinks" (openNote)="openNote($event, 'backlink')"></v42-backlinks-panel>
+          
         </article>
       }
     </main>
 
-    <v42-footer-notes-nav [notes]="index.notes" [brandName]="logoName" (openNote)="openNote($event)"></v42-footer-notes-nav>
   }
 </div>
