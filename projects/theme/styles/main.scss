@@ -4,6 +4,7 @@
 @use './text';
 @use './meta';
 @use './media';
+@use './layout';
 
 :root {
     --text-column-max-width: 800px;

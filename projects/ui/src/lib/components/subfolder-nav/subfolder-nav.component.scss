@@ -1,7 +1,8 @@
 
 .subfolder-nav {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 100%;
   gap: 0.4rem;
   border-bottom: 1px solid var(--vault42-border);
   padding: 0.3rem 0.6rem;
