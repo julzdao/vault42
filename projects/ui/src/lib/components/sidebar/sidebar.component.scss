@@ -7,11 +7,11 @@ $NOTE_COVER_HEIGHT: 17em;
   position: relative;
   width: 100%;
   overflow: hidden; // don't trap the wheel — let scroll pass through to the page
-  padding: 1rem 0.6rem;
+  padding: 0;
   border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.06));
 
   @media (min-width: 640px) {
-    padding: 1rem 1.5rem;
+    padding: 0;
   }
 
   @media (min-width: 1024px) {
@@ -20,7 +20,7 @@ $NOTE_COVER_HEIGHT: 17em;
     align-self: flex-start; // required for sticky to work inside a flex row
     width: 30%;
     height: 100dvh;
-    padding: 2rem 2.5rem;
+    padding: 0;
     border-bottom: none;
     border-right: 1px solid var(--border-color, rgba(0, 0, 0, 0.06));
   }

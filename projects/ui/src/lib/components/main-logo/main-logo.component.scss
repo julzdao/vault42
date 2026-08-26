@@ -1,8 +1,23 @@
 
+:host {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  gap: 0.3em;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.06));
+}
+
 @mixin logo-default {
-    font-family: 'Space Mono', monospace;
-    font-size: 1.3rem;
-    font-weight: 600;
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    font-weight: 300;
+    text-transform:uppercase;
+    letter-spacing: 1.2em;
+    margin-right: -1.2em;
+    text-align: right;
     white-space: nowrap;
     background: none;
 }
@@ -11,8 +26,6 @@
   @include logo-default;
 
   color:  var(--vault42-foreground);
-  margin-left: 1.2em;
-  margin-right: 1.5em;
   cursor: pointer;
 
   &:hover {
@@ -32,4 +45,14 @@
         color: var(--vault42-background);
         background: none;
   }
+}
+
+.small-rectangle {
+  position: absolute;
+  inset-inline-start: 33px;
+  inset-block-start: 33px;
+  width: 14px; 
+  height: 14px; 
+  shape-outside: inset(14px);
+  background-color: var(--vault42-accent);
 }
