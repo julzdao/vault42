@@ -12,6 +12,7 @@ export * from './lib/components/search-bar';
 export * from './lib/components/subfolder-nav';
 export * from './lib/components/top-nav';
 export * from './lib/components/sidebar';
+export * from './lib/components/sidebar-nav';
 
 /*
  * Public API Layout Components

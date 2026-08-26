@@ -1,4 +1,4 @@
-<nav class="subfolder-nav">
+<nav class="sub-nav">
       <button type="button" [class.active]="!currentSubfolder" (click)="select.emit(undefined)">All</button>
       @for (item of items; track item.name) {
         <button

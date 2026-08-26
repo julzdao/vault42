@@ -5,10 +5,11 @@ import {
   formatCreatedDate,
   V42GardenFacadeService
 } from '@vault42/core';
+import { V42SidebarNav } from '../sidebar-nav';
 
 @Component({
   selector: 'v42-sidebar',
-  imports: [CommonModule, V42Logo],
+  imports: [CommonModule, V42Logo, V42SidebarNav],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })

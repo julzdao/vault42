@@ -1,8 +1,9 @@
 <div class="prose">
 
     @if (selected(); as selected) {
-        
+
         <v42-main-logo variant="default" [logoName]="logoName" [clickable]="true" (navigate)="onClickLogo($event)"></v42-main-logo>  
+        <v42-sidebar-nav></v42-sidebar-nav>
         <header class="note-header">
           @if (selected.coverImage) {
           <img [src]="selected.coverImage" class="note-cover">
@@ -32,6 +33,7 @@
         }
     } @else {
         <v42-main-logo variant="default" [logoName]="logoName" [clickable]="true" (navigate)="navigate.emit({})"></v42-main-logo>  
+        <v42-sidebar-nav></v42-sidebar-nav>
         <header class="listing-head">
             <h1>{{ listingTitle | uppercase }}</h1>
             <p>{{ listingSubtitle }}</p>

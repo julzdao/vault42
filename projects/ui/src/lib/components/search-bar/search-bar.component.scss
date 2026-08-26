@@ -24,7 +24,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 1001 !important;
   background: rgba(0, 0, 0, 0.36);
   backdrop-filter: blur(3px);
   padding: 8vh 1rem 1rem;

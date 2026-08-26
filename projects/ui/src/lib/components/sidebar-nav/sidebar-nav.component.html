@@ -1,0 +1,8 @@
+<nav class="sub-nav">
+      @if (selected(); as selected) {
+            <button type="button" (click)="navigateHome()"><< All Notes</button>
+      } @else {
+            <button type="button" (click)="navigateHome()">About</button>
+      }
+      <!-- <v42-search-bar [defaultQuery]="q ?? ''" [notes]="searchCandidates()" (select)="onSearchSelect($event)"></v42-search-bar> -->
+</nav>
