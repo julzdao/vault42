@@ -2,11 +2,6 @@
 $NOTE_COVER_WIDTH: 20em;
 $NOTE_COVER_HEIGHT: 17em;
 
-.note-header {
-  text-align: left;
-  margin-top: 1.6rem;
-  margin-bottom: 1.2rem;
-}
 
 .note-title {
   margin: 0;
@@ -65,23 +60,6 @@ $NOTE_COVER_HEIGHT: 17em;
 .note-description {
   margin: 0.7rem auto 0;
   max-width: 56ch;
-  color: var(--vault42-muted-foreground);
-}
-
-.note-fundamental {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--vault42-foreground);
-  white-space: pre-line;
-  text-align: left;
-  line-height: 1.70;
-  margin-top: 0.6em;
-}
-
-.note-date {
-  margin: 0.55rem 0 0;
-  font-size: 0.84rem;
   color: var(--vault42-muted-foreground);
 }
 

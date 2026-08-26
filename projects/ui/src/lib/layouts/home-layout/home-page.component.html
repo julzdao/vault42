@@ -9,13 +9,7 @@
         <v42-note-layout></v42-note-layout>
       } @else {
         <div class="page-container"> 
-          <div class="sidebar">
-              <v42-main-logo variant="default" [logoName]="logoName" [clickable]="true" (navigate)="onNavigateTop($event)"></v42-main-logo>  
-              <header class="listing-head">
-                <h1>{{ listingTitle | uppercase }}</h1>
-                <p>{{ listingSubtitle }}</p>
-              </header>
-          </div>
+          <v42-sidebar (navigate)="onNavigateTop($event)"></v42-sidebar>
           <div class="content">
             <v42-top-nav class="v42-top-nav" [notebooks]="index().notebooks" [brandName]="logoName" [current]="notebook" (navigate)="onNavigateTop($event)">
               <v42-search-bar [defaultQuery]="q ?? ''" [notes]="searchCandidates()" (select)="onSearchSelect($event)"></v42-search-bar>

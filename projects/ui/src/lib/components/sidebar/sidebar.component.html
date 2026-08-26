@@ -1,0 +1,41 @@
+<div class="prose">
+
+    @if (selected(); as selected) {
+
+        <v42-main-logo variant="default" [logoName]="logoName" [clickable]="true" (navigate)="onClickLogo($event)"></v42-main-logo>  
+        <header class="note-header">
+          @if (selected.coverImage) {
+          <img [src]="selected.coverImage" class="note-cover">
+          }
+          @if (selected.fundamental) {
+            <p class="note-fundamental">{{ selected.fundamental }}</p>
+          }
+          @if (selected.createdAt) {
+            <p class="note-date">{{ formatDate(selected.createdAt) }}</p>
+          }
+        </header>
+
+        @if (selected.createdAt || (selected.tags?.length ?? 0) > 0 || (selected.stage?.length ?? 0) > 0) {
+          <div class="meta-row">
+            <div class="chips">
+              @if (selected.createdAt) {
+                <span class="chip">Created {{ formatDate(selected.createdAt) }}</span>
+              }
+              @for (stage of selected.stage ?? []; track stage) {
+                <span class="chip stage">Stage: {{ stage }}</span>
+              }
+              @for (tag of selected.tags ?? []; track trackByTag($index, tag)) {
+                <button class="chip tag" type="button" (click)="goToTag(tag)">#{{ tag }}</button>
+              }
+            </div>
+          </div>
+        }
+    } @else {
+        <v42-main-logo variant="default" [logoName]="logoName" [clickable]="true" (navigate)="navigate.emit({})"></v42-main-logo>  
+        <header class="listing-head">
+            <h1>{{ listingTitle | uppercase }}</h1>
+            <p>{{ listingSubtitle }}</p>
+        </header>
+    }
+        
+</div>

@@ -14,6 +14,7 @@ import { V42SubfolderNavComponent } from '../../components/subfolder-nav/subfold
 import { V42TopNavComponent } from '../../components/top-nav/top-nav.component';
 import { V42NoteLayout } from '../note-layout/note-layout.component';
 import { V42Logo } from '../../components/main-logo';
+import { V42Sidebar } from '../../components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-home-page',
@@ -29,7 +30,8 @@ import { V42Logo } from '../../components/main-logo';
     V42NoteCard,
     V42NoteRowItem,
     V42NoteLayout,
-    V42Logo
+    V42Logo,
+    V42Sidebar
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -105,18 +107,5 @@ export class V42HomeLayoutComponent implements OnInit {
 
   get q(): string | undefined {
     return this.facade.params().q;
-  }
-
-  get listingTitle(): string {
-    if (this.subfolder) return this.subfolder;
-    if (this.notebook) return this.notebook;
-    return 'All Notes';
-  }
-
-  get listingSubtitle(): string {
-    const count = this.listingNotes().length;
-    if (this.subfolder && this.notebook) return `${count} notes in ${this.notebook} / ${this.subfolder}`;
-    if (this.notebook) return `${count} notes in ${this.notebook}`;
-    return `${count} notes across all notebooks`;
   }
 }
