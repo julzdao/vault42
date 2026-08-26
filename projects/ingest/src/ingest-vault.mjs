@@ -80,6 +80,8 @@ for (const file of markdownFiles) {
     id: slug,
     slug,
     title,
+    up: typeof frontmatter.up === "string" ? removeSquareBrackets(frontmatter.up) : undefined,
+    upSlug: undefined,
     description: typeof frontmatter.description === "string" ? frontmatter.description : undefined,
     type: typeof frontmatter.type === "string" ? frontmatter.type : undefined,
     createdAt: typeof frontmatter.timestamp === "string" ? frontmatter.timestamp : undefined,
@@ -132,6 +134,18 @@ for (const note of notes) {
       context: contextSnippet(note.rawContent, link.index),
       hoverContext: expandedContext(note.rawContent, link.index),
     });
+  }
+
+  if(note.up) {
+    // From Up Note -> up-note
+    const upLinkPartialSlug =  slugify(note.up); 
+
+    const upTarget = notes.find((n) => n.slug.includes(upLinkPartialSlug));
+    if (!upTarget) {
+      continue;
+    }
+
+    note.upSlug = upTarget.slug;
   }
 }
 

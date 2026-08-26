@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { formatCreatedDate, V42GardenFacadeService } from '@vault42/core';
 import { V42BacklinksPanelComponent } from '../../components/backlinks-panel/backlinks-panel.component';
 import { V42NoteContentComponent } from '../../components/note-content/note-content.component';

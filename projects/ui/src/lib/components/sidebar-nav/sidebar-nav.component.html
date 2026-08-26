@@ -1,6 +1,11 @@
-<nav class="sub-nav">
+<nav class="sub-nav" id="sidebar-nav">
       @if (selected(); as selected) {
-            <button type="button" (click)="navigateHome()"><< All Notes</button>
+            <button type="button" (click)="onNavigateBack()"><< All Notes</button>
+
+            @if(selected.upSlug) {
+                  <button class="up-button" type="button" (click)="openNote(selected.upSlug)">{{ selected.up }} ↑</button>
+            }
+            
       } @else {
             <button type="button" (click)="navigateHome()">About</button>
       }

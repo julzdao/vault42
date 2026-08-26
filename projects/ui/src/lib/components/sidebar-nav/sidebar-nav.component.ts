@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import {
   SearchCandidate,
   V42GardenFacadeService
@@ -21,6 +21,7 @@ export class V42SidebarNav {
   readonly searchCandidates = this.facade.searchCandidates;
   @Output() select = new EventEmitter<string | undefined>();
 
+
   async onSearchSelect(candidate: SearchCandidate): Promise<void> {
     const targetNote = this.index().notes.find((entry) => entry.slug === candidate.slug);
     const scope = this.facade.deriveScopeFromNote(targetNote);
@@ -36,6 +37,21 @@ export class V42SidebarNav {
 
   navigateHome() {
     this.router.navigate(['/']);
+  }
+
+  async onNavigateBack(): Promise<void> {
+    await this.facade.navigateWith({
+      notebook: this.facade.params().notebook,
+      note: undefined,
+      q: undefined,
+      from: undefined,
+      subfolder: undefined,
+      subfolder3: undefined,
+    });
+  }
+
+  async openNote(slug: string, origin?: string): Promise<void> {
+    await this.facade.openNote(slug, origin);
   }
 
   get q(): string | undefined {
