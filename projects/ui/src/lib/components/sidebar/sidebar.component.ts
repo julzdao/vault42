@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, computed, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { V42Logo } from '../main-logo';
 import {
@@ -14,6 +14,7 @@ import { V42SidebarNav } from '../sidebar-nav';
   styleUrl: './sidebar.component.scss',
 })
 export class V42Sidebar {
+    
     protected readonly facade = inject(V42GardenFacadeService);
 
     readonly selected = this.facade.selected;
@@ -21,13 +22,26 @@ export class V42Sidebar {
     readonly listingNotes = this.facade.listingNotes;
     @Output() navigate = new EventEmitter<{ notebook?: string }>();
 
-    get notebook(): string | undefined {
+    get coverImage(): string {
+      const subfolderCover = this.facade.covers.find(x => x.id === this.subfolder);
+      if (subfolderCover) {
+        return subfolderCover.pathToCover;
+      }
+      const notebookCover = this.facade.covers.find(x => x.id === this.notebook);
+      if (notebookCover) {
+        return notebookCover.pathToCover;
+      }
+
+      return this.facade.defaultCover;
+    } 
+
+     get notebook(): string | undefined {
       return this.facade.params().notebook;
     }
 
     get subfolder(): string | undefined {
       return this.facade.params().subfolder;
-    }
+    } 
 
     get listingTitle(): string {
       if (this.subfolder) return this.subfolder;

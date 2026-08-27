@@ -7,6 +7,8 @@
         <header class="note-header">
           @if (selected.coverImage) {
           <img [src]="selected.coverImage" class="note-cover">
+          } @else {
+            <img [src]="coverImage" class="note-cover">
           }
           @if (selected.fundamental) {
             <p class="note-fundamental">{{ selected.fundamental }}</p>
@@ -34,6 +36,7 @@
     } @else {
         <v42-main-logo variant="default" [logoName]="logoName" [clickable]="true" (navigate)="navigate.emit({})"></v42-main-logo>  
         <v42-sidebar-nav></v42-sidebar-nav>
+        <img [src]="coverImage" class="note-cover">
         <header class="listing-head">
             <h1>{{ listingTitle | uppercase }}</h1>
             <p>{{ listingSubtitle }}</p>

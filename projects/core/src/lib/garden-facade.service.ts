@@ -15,6 +15,8 @@ export class V42GardenFacadeService {
   readonly params = this.nav.params;
   readonly index = this.indexSvc.index;
   readonly brandName = this.config.brandName;
+  readonly defaultCover = this.config.defaultCover;
+  readonly covers = this.config.covers;
 
   readonly notebookSubfolderTree = computed(() => {
     const p = this.params();
