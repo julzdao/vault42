@@ -6,7 +6,7 @@
   align-items: center;
   gap: 0.3em;
   padding: 1.2rem 0;
-  border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.06));
+  border-bottom: 1px solid var(--vault42-divider, rgba(0, 0, 0, 0.06));
 }
 
 @mixin logo-default {

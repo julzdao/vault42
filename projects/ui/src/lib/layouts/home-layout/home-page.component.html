@@ -11,7 +11,7 @@
         <div class="page-container"> 
           <v42-sidebar (navigate)="onNavigateTop($event)"></v42-sidebar>
           <div class="content">
-            <v42-top-nav class="v42-top-nav" [notebooks]="index().notebooks" [brandName]="logoName" [current]="notebook" (navigate)="onNavigateTop($event)">
+            <v42-top-nav class="v42-top-nav" [notebooks]="index().notebooks" [brandName]="logoName" (navigate)="onNavigateTop($event)">
               <v42-search-bar [defaultQuery]="q ?? ''" [notes]="searchCandidates()" (select)="onSearchSelect($event)"></v42-search-bar>
             </v42-top-nav>
 

@@ -24,7 +24,7 @@
   width: 100%;
   overflow: hidden; // don't trap the wheel — let scroll pass through to the page
   padding: 1rem 0.6rem;
-  border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.06));
+  border-bottom: 1px solid var(--vault42-divider, rgba(0, 0, 0, 0.06));
 
   @media (min-width: 640px) {
     padding: 1rem 1.5rem;
@@ -38,7 +38,7 @@
     height: 100dvh;
     padding: 2rem 2.5rem;
     border-bottom: none;
-    border-right: 1px solid var(--border-color, rgba(0, 0, 0, 0.06));
+    border-right: 1px solid var(--vault42-divider, rgba(0, 0, 0, 0.06));
   }
 }
 
@@ -69,7 +69,7 @@
   justify-content: flex-start;
   width: 100%;
   gap: 0.4rem;
-  border-bottom: 1px solid var(--vault42-border);
+  border-bottom: 1px solid var(--vault42-divider);
   padding: 0.3rem 0.6rem;
   background: var(--vault42-callout-background);
 

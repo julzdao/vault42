@@ -2,7 +2,7 @@
       <button
         type="button"
         class="nav-link"
-        [class.active]="!current"
+        [class.active]="!currentNotebook"
         (click)="navigate.emit({ notebook: undefined })"
       >
         ALL
@@ -11,7 +11,7 @@
         <button
           type="button"
           class="nav-link"
-          [class.active]="current === notebook"
+          [class.active]="currentNotebook === notebook"
           (click)="navigate.emit({ notebook })"
         >
           {{ notebook.toUpperCase() }}

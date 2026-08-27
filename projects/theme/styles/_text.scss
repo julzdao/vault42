@@ -114,7 +114,7 @@ hr {
     border-left: 2px solid color-mix(in srgb, var(--vault42-accent) 40%, transparent);
     color: var(--vault42-quote);
     font-style: italic;
-    font-family: var(--font-lato);
+    font-family: var(--font-serif);
 
     p {
       font-weight: 400;
@@ -154,7 +154,7 @@ hr {
     }
 
     .dg-callout-content p {
-      font-family: var(--font-lato);
+      font-family: var(--font-serif);
       font-size: 1rem;
       font-weight: 300;
       line-height: var(--leading-155);
