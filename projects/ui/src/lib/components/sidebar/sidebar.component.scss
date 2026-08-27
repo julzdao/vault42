@@ -1,11 +1,11 @@
 
-$NOTE_COVER_WIDTH: 20em;
 $NOTE_COVER_HEIGHT: 17em;
 
 
 :host { // Sidebar
   position: relative;
   width: 100%;
+  max-width: 480px;
   overflow: hidden; // don't trap the wheel — let scroll pass through to the page
   padding: 0;
   border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.06));
@@ -47,7 +47,6 @@ $NOTE_COVER_HEIGHT: 17em;
 
 .note-header {
   text-align: left;
-  margin-top: 1.6rem;
   margin-bottom: 1.2rem;
 }
 
@@ -56,7 +55,7 @@ $NOTE_COVER_HEIGHT: 17em;
 }
 
 .note-cover {
-  width: $NOTE_COVER_WIDTH; 
+  width: 100%; 
   height: $NOTE_COVER_HEIGHT;
   object-fit:cover;
   object-position: top;
