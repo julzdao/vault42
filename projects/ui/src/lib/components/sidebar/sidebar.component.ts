@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { V42Logo } from '../main-logo';
 import {
   formatCreatedDate,
-  V42GardenFacadeService
+  V42GardenFacadeService, FoldersConfig
 } from '@vault42/core';
 import { V42SidebarNav } from '../sidebar-nav';
 
@@ -22,18 +22,19 @@ export class V42Sidebar {
     readonly listingNotes = this.facade.listingNotes;
     @Output() navigate = new EventEmitter<{ notebook?: string }>();
 
-    get coverImage(): string {
-      const subfolderCover = this.facade.covers.find(x => x.id === this.subfolder);
-      if (subfolderCover) {
-        return subfolderCover.pathToCover;
-      }
-      const notebookCover = this.facade.covers.find(x => x.id === this.notebook);
-      if (notebookCover) {
-        return notebookCover.pathToCover;
-      }
+    private get resolvedFolderConfig(): FoldersConfig | undefined {
+      const foldersConfig = this.facade.foldersConfig; 
+      return foldersConfig.find(x => x.id === this.subfolder) 
+        ?? foldersConfig.find(x => x.id === this.notebook);
+    }
 
-      return this.facade.defaultCover;
-    } 
+    get folderFundamental(): string {
+      return this.resolvedFolderConfig?.fundamental ?? ""; // TODO: add default fundamental
+    }
+
+    get coverImage(): string {
+      return this.resolvedFolderConfig?.pathToCover ?? this.facade.defaultCover;
+    }
 
      get notebook(): string | undefined {
       return this.facade.params().notebook;

@@ -12,10 +12,7 @@
           }
           @if (selected.fundamental) {
             <p class="note-fundamental">{{ selected.fundamental }}</p>
-          }
-          @if (selected.createdAt) {
-            <p class="note-date">{{ formatDate(selected.createdAt) }}</p>
-          }
+          } 
         </header>
 
         @if (selected.createdAt || (selected.tags?.length ?? 0) > 0 || (selected.stage?.length ?? 0) > 0) {
@@ -23,9 +20,6 @@
             <div class="chips">
               @if (selected.createdAt) {
                 <span class="chip">Created {{ formatDate(selected.createdAt) }}</span>
-              }
-              @for (stage of selected.stage ?? []; track stage) {
-                <span class="chip stage">Stage: {{ stage }}</span>
               }
               @for (tag of selected.tags ?? []; track trackByTag($index, tag)) {
                 <button class="chip tag" type="button" (click)="goToTag(tag)">#{{ tag }}</button>
@@ -37,6 +31,7 @@
         <v42-main-logo variant="default" [logoName]="logoName" [clickable]="true" (navigate)="navigate.emit({})"></v42-main-logo>  
         <v42-sidebar-nav></v42-sidebar-nav>
         <img [src]="coverImage" class="note-cover">
+        <p class="note-fundamental">{{ folderFundamental }}</p>
         <header class="listing-head">
             <h1>{{ listingTitle | uppercase }}</h1>
             <p>{{ listingSubtitle }}</p>

@@ -5,12 +5,13 @@ export interface Vault42GardenConfig {
     brandName: string; 
     featuredNotesMax: number;
     defaultCover: string;
-    covers: CoverImage[];
+    folders: FoldersConfig[];
 }
 
-export interface CoverImage {
+export interface FoldersConfig {
   id: string;
   pathToCover: string;
+  fundamental: string;
 }
 
 export const V42_GARDEN_CONFIG = new InjectionToken<Vault42GardenConfig>('V42_GARDEN_CONFIG');
