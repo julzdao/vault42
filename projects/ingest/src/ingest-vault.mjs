@@ -83,7 +83,7 @@ for (const file of markdownFiles) {
     up: typeof frontmatter.up === "string" ? removeSquareBrackets(frontmatter.up) : undefined,
     upSlug: undefined,
     description: typeof frontmatter.description === "string" ? frontmatter.description : undefined,
-    type: typeof frontmatter.type === "string" ? frontmatter.type : undefined,
+    type: Array.isArray(frontmatter.type) ? frontmatter.type : [],
     createdAt: typeof frontmatter.timestamp === "string" ? frontmatter.timestamp : undefined,
     tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
     stage: Array.isArray(frontmatter.stage)

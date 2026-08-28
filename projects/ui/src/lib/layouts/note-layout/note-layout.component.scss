@@ -66,3 +66,12 @@ $NOTE_COVER_HEIGHT: 17em;
 .muted {
   color: var(--vault42-muted-foreground);
 }
+
+.type-divider {
+    border-bottom: 1px solid var(--vault42-muted-foreground, rgba(0, 0, 0, 0.06));
+    text-transform: uppercase;
+    font-weight: 300; 
+    font-family: var(--font-mono);
+    font-size: 0.7em;
+    color: var(--vault42-muted-foreground);
+}

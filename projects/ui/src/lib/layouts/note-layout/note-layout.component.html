@@ -10,6 +10,10 @@
             @if (selected.description) {
               <p class="note-description">{{ selected.description }}</p>
             }
+            @if (selected.type) {
+              <h5 class="type-divider">{{ selected.type[0] ? ':: ' + selected.type[0] : ':: Note' }}</h5>
+            }
+            
             <v42-note-content
               [html]="selected.htmlContent"
               [previews]="notePreviews()"
