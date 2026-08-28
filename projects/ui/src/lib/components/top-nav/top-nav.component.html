@@ -1,9 +1,8 @@
  <nav class="topnav">
-      <v42-main-logo variant="default" [logoName]="brandName" [clickable]="true" (navigate)="navigate.emit({})"></v42-main-logo>  
       <button
         type="button"
         class="nav-link"
-        [class.active]="!current"
+        [class.active]="!currentNotebook"
         (click)="navigate.emit({ notebook: undefined })"
       >
         ALL
@@ -12,7 +11,7 @@
         <button
           type="button"
           class="nav-link"
-          [class.active]="current === notebook"
+          [class.active]="currentNotebook === notebook"
           (click)="navigate.emit({ notebook })"
         >
           {{ notebook.toUpperCase() }}

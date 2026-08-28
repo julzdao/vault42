@@ -1,0 +1,28 @@
+<div class="page-container"> 
+
+  @if (selected(); as selected) {
+      <v42-sidebar (navigate)="onClickLogo($event)"></v42-sidebar>
+
+      <div class="content">
+        <article class="prose">
+          <div class="note-content-column prose">
+            <h1 class="note-title">{{ selected.title }}</h1>
+            @if (selected.description) {
+              <p class="note-description">{{ selected.description }}</p>
+            }
+            <v42-note-content
+              [html]="selected.htmlContent"
+              [previews]="notePreviews()"
+              (openNote)="openNote($event, 'content')">
+            </v42-note-content>
+            <v42-backlinks-panel
+              [backlinks]="selected.backlinks"
+              (openNote)="openNote($event, 'backlink')">
+            </v42-backlinks-panel>
+          </div>
+        </article>
+      </div>
+}
+</div>
+  
+

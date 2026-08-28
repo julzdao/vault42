@@ -7,7 +7,7 @@ import { log } from "./ingest/logger.mjs";
 import { parseFrontmatter, parseCoverProperty, removeSquareBrackets } from "./ingest/parser.mjs";
 import { findMarkdownFiles } from "./ingest/file-system.mjs";
 import { slugify, makeNoteHref, isExternalHref, normalizeLinkValue, resolveNoteSlug, extractLinks } from "./ingest/links.mjs";
-import { sanitizeSegment, markdownToHtml } from "./ingest/markdown.mjs";
+import { sanitizeSegment, markdownToHtml, extractFundamental } from "./ingest/markdown.mjs";
 import { contextSnippet, expandedContext } from "./ingest/context-snippet.mjs";
 
 const CONFIG_FLAG = "--config";
@@ -80,6 +80,8 @@ for (const file of markdownFiles) {
     id: slug,
     slug,
     title,
+    up: typeof frontmatter.up === "string" ? removeSquareBrackets(frontmatter.up) : undefined,
+    upSlug: undefined,
     description: typeof frontmatter.description === "string" ? frontmatter.description : undefined,
     type: typeof frontmatter.type === "string" ? frontmatter.type : undefined,
     createdAt: typeof frontmatter.timestamp === "string" ? frontmatter.timestamp : undefined,
@@ -95,7 +97,9 @@ for (const file of markdownFiles) {
     backlinks: [],
     rawContent: body,
     htmlContent: "",
-    coverImage: parseCoverProperty(frontmatter.cover, segments)
+    coverImage: parseCoverProperty(frontmatter.cover, segments),
+    hasFundamental: frontmatter.hasFundamental,
+    fundamental: ""
   };
 
   notes.push(note);
@@ -131,12 +135,35 @@ for (const note of notes) {
       hoverContext: expandedContext(note.rawContent, link.index),
     });
   }
+
+  if(note.up) {
+    // From Up Note -> up-note
+    const upLinkPartialSlug =  slugify(note.up); 
+
+    const upTarget = notes.find((n) => n.slug.includes(upLinkPartialSlug));
+    if (!upTarget) {
+      continue;
+    }
+
+    note.upSlug = upTarget.slug;
+  }
 }
 
 // Step 3: parse markdown to html
 
 for (const note of notes) {
-  note.htmlContent = markdownToHtml(note.rawContent, note.relativePath);
+  var remainingContent = note.rawContent;
+  if (note.hasFundamental) {
+    const [extractedFundamental, remainingMarkdown] = extractFundamental(note.rawContent, note.relativePath);
+
+    if (extractedFundamental == null) {
+      log.warn(`hasFundamental is set but no divider found in ${note.relativePath} — skipping extraction`);
+    }
+
+    note.fundamental = extractedFundamental ?? undefined;
+    remainingContent = remainingMarkdown;
+  }
+  note.htmlContent = markdownToHtml(remainingContent, note.relativePath); 
 }
 
 const notebooks = Array.from(new Set(notes.map((n) => n.notebook))).sort((a, b) =>

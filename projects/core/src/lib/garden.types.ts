@@ -8,6 +8,8 @@ export type BacklinkEntry = {
 export type NoteRecord = {
   id: string;
   slug: string;
+  up?: string;
+  upSlug?: string;
   title: string;
   description?: string;
   type?: string;
@@ -22,6 +24,8 @@ export type NoteRecord = {
   htmlContent: string;
   coverImage?: string;
   coverUpdatedAt?: string;
+  hasFundamental?: boolean;
+  fundamental?: string;
 };
 
 export type GardenIndex = {

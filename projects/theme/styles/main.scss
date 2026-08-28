@@ -4,22 +4,23 @@
 @use './text';
 @use './meta';
 @use './media';
+@use './layout';
 
 :root {
     --text-column-max-width: 800px;
     --body-2: 17px;
     --leading-155: 1.55;
-    --prose-line-height: 1.42;
+    --prose-line-height: 1.5em;
     --weight-text-regular: 400;
     --background-dot-spacing: 133px;
     --background-dot-size: 1px;
 }
 
 body {
-  background: radial-gradient(var(--vault42-background-gradient), var(--vault42-background));
+  background: var(--vault42-background);
   color: var(--vault42-foreground);
   box-sizing: border-box;
-  font-family: var(--font-lato);
+  font-family: var(--font-serif);
   font-weight: 300;
   margin: 0;
   line-height: 1.55;
@@ -30,9 +31,6 @@ body {
   inset: 0;
   height: 100%;
   width: 100%;
-  background-image: radial-gradient(var(--vault42-background-dot) var(--background-dot-size), var(--vault42-background) var(--background-dot-size));
-  background-size: var(--background-dot-spacing) var(--background-dot-spacing);
-  background-attachment: fixed;
 
     @media (min-width: 820px) {
       font-size: 1.1rem;

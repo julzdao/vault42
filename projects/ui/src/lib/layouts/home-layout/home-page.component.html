@@ -1,90 +1,46 @@
 <div class="screen">
-  @if (loading) {
+  @if (loading()) {
     <div class="status">Loading garden...</div>
-  } @else if (error) {
-    <div class="status error">{{ error }}</div>
+  } @else if (error()) {
+    <div class="status error">{{ error() }}</div>
   } @else {
-    <v42-top-nav [notebooks]="index.notebooks" [brandName]="logoName" [current]="notebook" (navigate)="onNavigateTop($event)">
-      <v42-search-bar [defaultQuery]="q ?? ''" [notes]="searchCandidates" (select)="onSearchSelect($event)"></v42-search-bar>
-    </v42-top-nav>
-
-    @if (notebook && notebookSubfolderTree.length > 0) {
-      <v42-subfolder-nav [items]="notebookSubfolderTree" [currentSubfolder]="subfolder" (select)="onSubfolderSelect($event)"></v42-subfolder-nav>
-    }
-
-    <main class="content">
-      @if (!selected) {
-        <section class="listing-shell">
-          <header class="listing-head">
-            <h1>{{ listingTitle | uppercase }}</h1>
-            <p>{{ listingSubtitle }}</p>
-          </header>
-
-          @if (listingNotes.length === 0) {
-            <div class="empty-box">No notes found for this section.</div>
-          } @else {
-
-            <ul class="note-grid">
-              @for (note of featuredNotes; track trackByNote($index, note)) {
-                <li>
-                  <v42-note-card
-                    [note]="note"
-                    (open)="openNote(note.slug)">
-                  </v42-note-card>
-                </li>
-              }
-            </ul>
-
-            @if (remainingNotes.length > 0) {
-              <h2 class="notes-row-title">Notes:</h2>
-
-              @for (note of remainingNotes; track note.id) {
-                <v42-note-row-item
-                  [note]="note"
-                  (open)="openNote(note.slug)">
-                </v42-note-row-item>
-              }
-            }
-          }
-        </section>
+    <main class="main">
+      @if (selected(); as note) {
+        <v42-note-layout></v42-note-layout>
       } @else {
-        <article class="prose note-shell">
-          <header class="note-header">
-            <h1 class="note-title">{{ selected.title }}</h1>
-            @if (selected.description) {
-              <p class="note-description">{{ selected.description }}</p>
+        <div class="page-container"> 
+          <v42-sidebar (navigate)="onNavigateTop($event)"></v42-sidebar>
+          <div class="content">
+            <v42-top-nav class="v42-top-nav" [notebooks]="index().notebooks" [brandName]="logoName" (navigate)="onNavigateTop($event)">
+              <v42-search-bar [defaultQuery]="q ?? ''" [notes]="searchCandidates()" (select)="onSearchSelect($event)"></v42-search-bar>
+            </v42-top-nav>
+
+            @if (notebook && notebookSubfolderTree().length > 0) {
+              <v42-subfolder-nav class="v42-subfolder-nav" [items]="notebookSubfolderTree()" [currentSubfolder]="subfolder" (select)="onSubfolderSelect($event)"></v42-subfolder-nav>
             }
-            @if (selected.createdAt) {
-              <p class="note-date">{{ formatDate(selected.createdAt) }}</p>
-            }
-          </header>
 
-          @if (selected.createdAt || (selected.tags?.length ?? 0) > 0 || (selected.stage?.length ?? 0) > 0) {
-            <div class="meta-row">
-              <div class="chips">
-                @if (selected.createdAt) {
-                  <span class="chip">Created {{ formatDate(selected.createdAt) }}</span>
-                }
-                @for (stage of selected.stage ?? []; track stage) {
-                  <span class="chip stage">Stage: {{ stage }}</span>
-                }
-                @for (tag of selected.tags ?? []; track trackByTag($index, tag)) {
-                  <button class="chip tag" type="button" (click)="goToTag(tag)">#{{ tag }}</button>
-                }
-              </div>
-            </div>
-          }
+            <section class="listing-shell">
+              @if (listingNotes().length === 0) {
+                <div class="empty-box">No notes found for this section.</div>
+              } @else {
+                <ul class="note-grid">
+                  @for (note of featuredNotes(); track trackByNote($index, note)) {
+                    <li><v42-note-card [note]="note" (open)="openNote(note.slug)"></v42-note-card></li>
+                  }
+                </ul>
+              }
 
-          @if (selected.coverImage) {
-            <img [src]="selected.coverImage" class="note-cover">
-          }
-
-          <v42-note-content [html]="selected.htmlContent" [previews]="notePreviews" (openNote)="openNote($event, 'content')"></v42-note-content>
-          <v42-backlinks-panel [backlinks]="selected.backlinks" (openNote)="openNote($event, 'backlink')"></v42-backlinks-panel>
-        </article>
+              @if (remainingNotes().length > 0) {
+                <h2 class="notes-row-title">Notes:</h2>
+                @for (note of remainingNotes(); track note.id) {
+                  <v42-note-row-item [note]="note" (open)="openNote(note.slug)"></v42-note-row-item>
+                }
+              }
+            </section>
+          </div>
+        </div>
+        
       }
     </main>
-
-    <v42-footer-notes-nav [notes]="index.notes" [brandName]="logoName" (openNote)="openNote($event)"></v42-footer-notes-nav>
-  }
+}
 </div>

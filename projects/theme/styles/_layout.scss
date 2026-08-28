@@ -1,0 +1,94 @@
+
+.screen {
+  min-height: 100vh;
+}
+
+.main {
+  min-height: 100vh;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 100dvh;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
+}
+
+.sidebar {
+  position: relative;
+  width: 100%;
+  overflow: hidden; // don't trap the wheel — let scroll pass through to the page
+  padding: 1rem 0.6rem;
+  border-bottom: 1px solid var(--vault42-divider, rgba(0, 0, 0, 0.06));
+
+  @media (min-width: 640px) {
+    padding: 1rem 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    position: sticky;
+    top: 0;
+    align-self: flex-start; // required for sticky to work inside a flex row
+    width: 30%;
+    height: 100dvh;
+    padding: 2rem 2.5rem;
+    border-bottom: none;
+    border-right: 1px solid var(--vault42-divider, rgba(0, 0, 0, 0.06));
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+  margin: 0 auto;
+
+  @media (min-width: 900px) {
+    padding: 0;
+  }
+
+  @media (min-width: 1024px) {
+    width: 70%;
+    margin: 0;
+  }
+
+  @media (min-width: 1200px) {
+    padding: 0;
+  }
+}
+
+.sub-nav {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 0.4rem;
+  border-bottom: 1px solid var(--vault42-divider);
+  padding: 0.3rem 0.6rem;
+  background: var(--vault42-callout-background);
+
+  button {
+    border: 0;
+    cursor: pointer;
+    background: transparent;
+    color: var(--vault42-muted-foreground);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.07em;
+    padding: 0.3em 0.7em;
+    
+    &.active,
+    &:hover {
+      color: var(--vault42-muted-foreground);
+      background-color: var(--vault42-accent);
+    }
+  }
+}
+
+

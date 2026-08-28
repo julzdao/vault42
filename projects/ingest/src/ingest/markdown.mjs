@@ -99,6 +99,35 @@ function renderCodeBlock(lines, language) {
   return `<pre class="dg-code-block"${langAttr}><code${langClass}>${escapedCode}</code></pre>`;
 }
 
+const FUNDAMENTAL_SCAN_LINES = 10; // safety cap while searching for the divider
+const DIVIDER_LINE = /^-{3,}\s*$/;
+
+export function extractFundamental(markdown, fromRelativePath) {
+  const lines = markdown.split(/\r?\n/);
+  const fundamentalLines = [];
+  let dividerIndex = -1;
+
+  const scanLimit = Math.min(FUNDAMENTAL_SCAN_LINES, lines.length);
+  for (let i = 0; i < scanLimit; i += 1) {
+    const trimmed = lines[i].trim();
+    if (DIVIDER_LINE.test(trimmed)) {
+      dividerIndex = i;
+      break;
+    }
+    fundamentalLines.push(trimmed);
+  }
+
+  if (dividerIndex === -1) {
+    // No divider found in the scan window — don't touch the note.
+    return [null, markdown];
+  }
+
+  const fundamental = fundamentalLines.join("\n").trim();
+  const remaining = lines.slice(dividerIndex + 1).join("\n");
+
+  return [fundamental || null, remaining];
+}
+
 export function markdownToHtml(markdown, fromRelativePath) {
   const lines = markdown.split(/\r?\n/);
   const html = [];
