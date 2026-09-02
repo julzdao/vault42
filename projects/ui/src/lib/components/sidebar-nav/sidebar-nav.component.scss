@@ -11,6 +11,7 @@ $GITHUB_ICON_OPACITY: 0.8;
 #github-button {
     background: transparent;
     padding: $GITHUB_ICON_PADDING;
+    border-bottom: 0px transparent;
 
     img {
         width: $GITHUB_ICON_WIDTH;
