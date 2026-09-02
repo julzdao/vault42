@@ -79,6 +79,8 @@ hr {
   a {
    color: var(--vault42-obsidian-link);
    font-weight: 400;
+   text-decoration: none;
+   border-bottom: 1px solid var(--vault42-border, rgba(0, 0, 0, 0.06));
   }
 
   a[href^='http://'],
@@ -90,12 +92,12 @@ hr {
   a[href^='http://']:hover,
   a[href^='https://']:hover,
   a[href^='mailto:']:hover {
-    color: var(--vault42-background);
+    color: var(--vault42-foreground);
     background: var(--vault42-link);
   }
 
   a:hover {
-    color: var(--vault42-background);
+    color: var(--vault42-foreground);
     background: var(--vault42-obsidian-link);
   }
 

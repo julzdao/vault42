@@ -24,26 +24,26 @@ function inlineMarkdownToHtml(input, fromRelativePath) {
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_m, label, href) => {
       const trimmedHref = href.trim();
       if (!trimmedHref || trimmedHref.startsWith("#")) {
-        return `<a href="${trimmedHref}" class="underline">${label}</a>`;
+        return `<a href="${trimmedHref}" class="">${label}</a>`;
       }
       if (isExternalHref(trimmedHref)) {
-        return `<a href="${trimmedHref}" class="underline">${label}</a>`;
+        return `<a href="${trimmedHref}" class="">${label}</a>`;
       }
 
       const targetSlug = resolveNoteSlug(trimmedHref, fromRelativePath);
       if (!targetSlug) {
-        return `<a href="${trimmedHref}" class="underline">${label}</a>`;
+        return `<a href="${trimmedHref}" class="">${label}</a>`;
       }
 
-      return `<a href="${makeNoteHref(targetSlug)}" class="underline decoration-2 underline-offset-2">${label}</a>`;
+      return `<a href="${makeNoteHref(targetSlug)}" class="">${label}</a>`;
     })
     .replace(/\[\[([^\]|]+)(\|([^\]]+))?\]\]/g, (_m, p1, _p2, p3) => {
       const label = p3 || p1;
       const targetSlug = resolveNoteSlug(p1, fromRelativePath);
       if (!targetSlug) {
-        return `<span class="rounded bg-[var(--muted)] px-1">${label}</span>`;
+        return `<span class="rounded px-1">${label}</span>`;
       }
-      return `<a href="${makeNoteHref(targetSlug)}" class="rounded bg-[var(--muted)] px-1 underline decoration-2 underline-offset-2">${label}</a>`;
+      return `<a href="${makeNoteHref(targetSlug)}" class="rounded px-1">${label}</a>`;
     });
 }
 
