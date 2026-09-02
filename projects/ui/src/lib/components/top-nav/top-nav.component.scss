@@ -37,4 +37,6 @@ button {
   margin-left: auto;
   width: min(360px, 44vw);
   min-width: 190px;
+  display: flex;
+  justify-content: flex-end;
 }
