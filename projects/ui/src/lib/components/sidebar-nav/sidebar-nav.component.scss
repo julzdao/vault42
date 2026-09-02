@@ -1,5 +1,24 @@
 
+$GITHUB_ICON_WIDTH: 16px;
+$GITHUB_ICON_PADDING: 0.3em 0.6em 0.22em 0.6em;
+$GITHUB_ICON_OPACITY: 0.8;
+
 #sidebar-nav {
     display: flex; 
     justify-content: space-between;
+}
+
+#github-button {
+    background: transparent;
+    padding: $GITHUB_ICON_PADDING;
+
+    img {
+        width: $GITHUB_ICON_WIDTH;
+        height: auto; 
+        opacity: $GITHUB_ICON_OPACITY;
+    }
+
+    &:hover {
+        background: var(--vault42-accent);
+    }
 }
