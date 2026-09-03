@@ -10,7 +10,6 @@ export interface Vault42GardenConfig {
 
 export interface FoldersConfig {
   id: string;
-  pathToCover: string;
   fundamental: string;
 }
 

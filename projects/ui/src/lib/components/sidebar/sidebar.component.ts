@@ -9,7 +9,8 @@ import { V42SidebarNav } from '../sidebar-nav';
 import { HoverNoteDirective } from '../../directives/HoverNoteDirective';
 
 interface SidebarDisplay {
-  coverImage: string;
+  title: string | undefined;
+  coverImage: string | undefined;
   fundamental: string;
 }
 
@@ -38,12 +39,14 @@ export class V42Sidebar {
       const note = this.displayNote();
       if (note?.coverImage || note?.fundamental) {
         return {
-          coverImage: note.coverImage ?? this.resolvedFolderConfig?.pathToCover ?? this.facade.defaultCover,
+          title: note.title,
+          coverImage: note.coverImage,
           fundamental: note.fundamental ?? this.resolvedFolderConfig?.fundamental ?? "",
         };
       }
       return {
-        coverImage: this.resolvedFolderConfig?.pathToCover ?? this.facade.defaultCover,
+        title: note?.title,
+        coverImage: note?.coverImage,
         fundamental: this.resolvedFolderConfig?.fundamental ?? "",
       };
     });
@@ -58,10 +61,6 @@ export class V42Sidebar {
       return this.resolvedFolderConfig?.fundamental ?? ""; // TODO: add default fundamental
     }
 
-    get coverImage(): string {
-      return this.resolvedFolderConfig?.pathToCover ?? this.facade.defaultCover;
-    }
-
      get notebook(): string | undefined {
       return this.facade.params().notebook;
     }
@@ -69,19 +68,6 @@ export class V42Sidebar {
     get subfolder(): string | undefined {
       return this.facade.params().subfolder;
     } 
-
-    get listingTitle(): string {
-      if (this.subfolder) return this.subfolder;
-      if (this.notebook) return this.notebook;
-      return 'All Notes';
-    }
-
-    get listingSubtitle(): string {
-      const count = this.listingNotes().length;
-      if (this.subfolder && this.notebook) return `${count} notes in ${this.notebook} / ${this.subfolder}`;
-      if (this.notebook) return `${count} notes in ${this.notebook}`;
-      return `${count} notes across all notebooks`;
-    }
 
     formatDate(value?: string): string | null {
       return formatCreatedDate(value);

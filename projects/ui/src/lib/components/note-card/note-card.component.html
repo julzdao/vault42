@@ -1,4 +1,4 @@
-<button type="button" class="note-card" (click)="open.emit()">
+<button [hovernote]="note" type="button" class="note-card" (click)="open.emit()">
     @if (note.coverImage) {
         <img [src]="note.coverImage">
     }

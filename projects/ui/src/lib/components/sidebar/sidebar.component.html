@@ -5,7 +5,14 @@
         <v42-main-logo variant="default" [logoName]="logoName" [clickable]="true" (navigate)="onClickLogo($event)"></v42-main-logo>  
         <v42-sidebar-nav></v42-sidebar-nav>
         <header class="note-header">
-          <img [src]="display().coverImage" class="note-cover">
+          @if (display().coverImage) {
+            <img [src]="display().coverImage" class="note-cover">
+          } @else {
+            <div class="note-no-cover">
+                <h6 id="note-no-cover__title">{{ display().title }}</h6>
+            </div>
+          }
+          
           @if (display().fundamental) {
             <p class="note-fundamental">{{ display().fundamental }}</p>
           }
@@ -26,11 +33,24 @@
     } @else {
         <v42-main-logo variant="default" [logoName]="logoName" [clickable]="true" (navigate)="navigate.emit({})"></v42-main-logo>  
         <v42-sidebar-nav></v42-sidebar-nav>
-        <img [src]="display().coverImage" class="note-cover">
+        @if (display().coverImage) {
+          <img [src]="display().coverImage" class="note-cover">
+        } @else {
+            <div class="note-no-cover">
+
+              @if (display().title) {
+                <h6 id="note-no-cover__title">{{ display().title }}</h6>
+              } @else if (subfolder) {
+                <h6 id="note-no-cover__title">{{ subfolder }}</h6>
+              } @else if (notebook) {
+                <h6 id="note-no-cover__title">{{ notebook }}</h6>
+              } @else {
+                <h6 id="note-no-cover__title">archive</h6>
+              }
+    
+            </div>
+        }
+        
         <p class="note-fundamental">{{ display().fundamental }}</p>
-        <header class="listing-head">
-            <h1>{{ listingTitle | uppercase }}</h1>
-            <p>{{ listingSubtitle }}</p>
-        </header>
     }   
 </div>

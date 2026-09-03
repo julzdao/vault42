@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { getNoteContext } from '@vault42/core';
 import { NoteRecord } from '@vault42/core';
+import { HoverNoteDirective } from '../../directives/HoverNoteDirective';
 
 @Component({
   selector: 'v42-note-card',
-  imports: [],
+  imports: [ HoverNoteDirective ],
   templateUrl: './note-card.component.html',
   styleUrl: './note-card.component.scss',
 })

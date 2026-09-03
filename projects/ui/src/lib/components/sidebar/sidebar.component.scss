@@ -63,6 +63,31 @@ $NOTE_COVER_HEIGHT: 17em;
   border-bottom: 1px solid var(--vault42-divider);
 }
 
+.note-no-cover {
+  width: 100%; 
+  height: $NOTE_COVER_HEIGHT;
+  background-color: transparent;
+  background-image: url('/default.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  padding: 1em 3em;
+}
+
+#note-no-cover__title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 300;
+  text-transform:uppercase;
+  letter-spacing: 1.2em;
+  text-align: center;
+}
+
 
 .note-fundamental {
   font-family: var(--font-mono);
