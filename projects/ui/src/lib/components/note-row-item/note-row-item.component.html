@@ -1,4 +1,4 @@
-<button class="reset-button note-row" (click)="open.emit()">
+<button [hovernote]="note" class="reset-button note-row" (click)="open.emit()">
   <h4 class="note-row__notebook">{{ note.notebook }}</h4>
   <h3 class="note-row__title">[   {{ note.title }}   ]</h3>
   <h4 class="note-row__description">{{ trimmedDescription }}</h4>

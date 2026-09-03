@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
+import {
+  V42GardenFacadeService
+} from '@vault42/core';
 
 @Component({
   selector: 'v42-note-content',
@@ -9,50 +12,49 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
   styleUrl: './note-content.component.scss',
 })
 export class V42NoteContentComponent {
+   protected readonly facade = inject(V42GardenFacadeService);
+   
   @Input() html = '';
   @Input() previews: Record<string, { coverImage: string; coverUpdatedAt?: string }> = {};
   @Output() openNote = new EventEmitter<string>();
 
-  @ViewChild('preview') previewRef?: ElementRef<HTMLDivElement>;
-
-  previewState = { visible: false, src: '', x: 0, y: 0 };
+  private parseNoteSlugFromHref(href: string): string | null {
+    try {
+      const url = new URL(href, window.location.origin);
+      return url.searchParams.get('note');
+    } catch {
+      return null;
+    }
+  }
 
   onClick(event: Event): void {
     const target = event.target as HTMLElement | null;
     const anchor = target?.closest('a');
     if (!(anchor instanceof HTMLAnchorElement)) return;
 
-    let url: URL;
-    try {
-      url = new URL(anchor.href, window.location.origin);
-    } catch {
-      return;
-    }
-
-    const slug = url.searchParams.get('note');
+    const slug = this.parseNoteSlugFromHref(anchor.href);
     if (!slug) return;
 
     event.preventDefault();
     this.openNote.emit(slug);
   }
 
-  onHover(event: MouseEvent): void {
-    const target = event.target as HTMLElement | null;
-    const anchor = target?.closest('a');
-    if (!(anchor instanceof HTMLAnchorElement)) return;
+  onMouseOver(event: MouseEvent): void {
+    const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a');
+    if (!link) return;
 
-    let url: URL;
-    try {
-      url = new URL(anchor.href, window.location.origin);
-    } catch {
-      return;
-    }
-
-    const slug = url.searchParams.get('note');
+    const slug = this.parseNoteSlugFromHref(link.getAttribute('href')!);
     if (!slug) return;
+
+    const note = this.facade.findNoteBySlug(slug);
+    if (note) {
+      this.facade.setHoveredNote(note);
+    }
   }
 
-  hidePreview(): void {
-    this.previewState = { ...this.previewState, visible: false };
+  onMouseOut(event: MouseEvent): void {
+    const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a');
+    if (!link) return;
+    this.facade.setHoveredNote(undefined);
   }
 }

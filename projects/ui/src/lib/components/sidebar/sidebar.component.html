@@ -5,14 +5,10 @@
         <v42-main-logo variant="default" [logoName]="logoName" [clickable]="true" (navigate)="onClickLogo($event)"></v42-main-logo>  
         <v42-sidebar-nav></v42-sidebar-nav>
         <header class="note-header">
-          @if (selected.coverImage) {
-          <img [src]="selected.coverImage" class="note-cover">
-          } @else {
-            <img [src]="coverImage" class="note-cover">
+          <img [src]="display().coverImage" class="note-cover">
+          @if (display().fundamental) {
+            <p class="note-fundamental">{{ display().fundamental }}</p>
           }
-          @if (selected.fundamental) {
-            <p class="note-fundamental">{{ selected.fundamental }}</p>
-          } 
         </header>
 
         @if (selected.createdAt || (selected.tags?.length ?? 0) > 0 || (selected.stage?.length ?? 0) > 0) {
@@ -30,8 +26,8 @@
     } @else {
         <v42-main-logo variant="default" [logoName]="logoName" [clickable]="true" (navigate)="navigate.emit({})"></v42-main-logo>  
         <v42-sidebar-nav></v42-sidebar-nav>
-        <img [src]="coverImage" class="note-cover">
-        <p class="note-fundamental">{{ folderFundamental }}</p>
+        <img [src]="display().coverImage" class="note-cover">
+        <p class="note-fundamental">{{ display().fundamental }}</p>
         <header class="listing-head">
             <h1>{{ listingTitle | uppercase }}</h1>
             <p>{{ listingSubtitle }}</p>

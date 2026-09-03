@@ -1,4 +1,4 @@
-import { Component, computed, EventEmitter, inject, Output } from '@angular/core';
+import { Component, computed, Directive, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { V42Logo } from '../main-logo';
 import {
@@ -6,10 +6,16 @@ import {
   V42GardenFacadeService, FoldersConfig
 } from '@vault42/core';
 import { V42SidebarNav } from '../sidebar-nav';
+import { HoverNoteDirective } from '../../directives/HoverNoteDirective';
+
+interface SidebarDisplay {
+  coverImage: string;
+  fundamental: string;
+}
 
 @Component({
   selector: 'v42-sidebar',
-  imports: [CommonModule, V42Logo, V42SidebarNav],
+  imports: [CommonModule, V42Logo, V42SidebarNav, HoverNoteDirective],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
@@ -21,6 +27,26 @@ export class V42Sidebar {
     readonly logoName = this.facade.brandName;
     readonly listingNotes = this.facade.listingNotes;
     @Output() navigate = new EventEmitter<{ notebook?: string }>();
+
+    readonly displayNote = computed(() => this.facade.hoveredNote() ?? this.facade.selected());
+
+    /**
+     * Displays the sidebar's display object, which is a combination of the selected note's cover image and fundamental data.
+     * @returns The sidebar's display object
+     */
+    readonly display = computed<SidebarDisplay>(() => {
+      const note = this.displayNote();
+      if (note?.coverImage || note?.fundamental) {
+        return {
+          coverImage: note.coverImage ?? this.resolvedFolderConfig?.pathToCover ?? this.facade.defaultCover,
+          fundamental: note.fundamental ?? this.resolvedFolderConfig?.fundamental ?? "",
+        };
+      }
+      return {
+        coverImage: this.resolvedFolderConfig?.pathToCover ?? this.facade.defaultCover,
+        fundamental: this.resolvedFolderConfig?.fundamental ?? "",
+      };
+    });
 
     private get resolvedFolderConfig(): FoldersConfig | undefined {
       const foldersConfig = this.facade.foldersConfig; 

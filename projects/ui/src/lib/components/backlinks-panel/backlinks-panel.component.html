@@ -5,7 +5,9 @@
       }
       <ul>
         @for (item of backlinks; track item.fromSlug + '-' + $index) {
-          <li>
+          <li 
+            (mouseover)="onMouseOver(item.fromSlug)"
+            (mouseout)="onMouseOut()">
             <button type="button" (click)="openNote.emit(item.fromSlug)">{{ item.fromTitle }}</button>
             <p>{{ item.context }}</p>
           </li>

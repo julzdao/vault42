@@ -1,8 +1,9 @@
-import { computed, inject, Injectable } from "@angular/core";
+import { computed, inject, Injectable, signal } from "@angular/core";
 import { V42GardenIndexService } from "./garden-index.service";
 import { V42GardenNavigationService } from "./garden-nav.service";
 import { V42_GARDEN_CONFIG } from "./garden-config";
 import { buildNotePreviews, filterNotes, getNotebookSubfolderTree, toSearchCandidates } from "./garden-utils";
+import { NoteRecord } from "./garden.types";
 
 @Injectable({ providedIn: 'root' })
 export class V42GardenFacadeService {
@@ -17,6 +18,9 @@ export class V42GardenFacadeService {
   readonly brandName = this.config.brandName;
   readonly defaultCover = this.config.defaultCover;
   readonly foldersConfig = this.config.folders;
+
+  private readonly _hoveredNote = signal<NoteRecord | undefined>(undefined);
+  readonly hoveredNote = this._hoveredNote.asReadonly();
 
   readonly notebookSubfolderTree = computed(() => {
     const p = this.params();
@@ -36,6 +40,23 @@ export class V42GardenFacadeService {
     return this.filtered().find((n) => n.slug === note)
       ?? (!notebook && !subfolder && !subfolder3 ? this.indexSvc.index().notes.find((n) => n.slug === note) : undefined);
   });
+
+  /**
+   * Finds the note within the index depending on specified slug.
+   * @param slug - the note slug
+   * @returns the NoteRecord from the specified slug.
+   */ 
+  findNoteBySlug(slug: string) {
+    return this.indexSvc.index().notes.find((entry) => entry.slug === slug);
+  }
+
+  /**
+   * Sets the current "Hovered" note to display.
+   * @param note - the NoteRecord.
+   */
+  setHoveredNote(note: NoteRecord | undefined): void {
+    this._hoveredNote.set(note);
+  }
 
   readonly notePreviews = computed(() => buildNotePreviews(this.indexSvc.index()));
   readonly searchCandidates = computed(() => toSearchCandidates(this.indexSvc.index()));
